@@ -13,6 +13,18 @@ function App() {
 
   return (
     <>
+      function App() {
+  return (
+    <div>
+      <Header />
+      <MainContent />
+      <Footer />
+    </div>
+  );
+}
+
+export default App;
+
        <div>
       <WelcomeMessage />
       {/* Other components or content can go here */}
