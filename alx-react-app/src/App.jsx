@@ -1,10 +1,3 @@
-import UserProfile from './components/UserProfile';
-
-import Header from './Header';
-import MainContent from './MainContent';
-import Footer from './Footer';
-import WelcomeMessage from './components/WelcomeMessage';
-
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
@@ -15,24 +8,6 @@ function App() {
 
   return (
     <>
-     <div>
-      <UserProfile 
-        name="Alice" 
-        age="25" 
-        bio="Loves hiking and photography" 
-      />
-    </div>
-    <div>
-      <Header />
-      <MainContent />
-      <Footer />
-    </div>
-  
-
-       <div>
-      <WelcomeMessage />
-      {/* Other components or content can go here */}
-    </div>
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
