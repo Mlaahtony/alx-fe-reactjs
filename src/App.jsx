@@ -1,3 +1,4 @@
+import UserProfile from './components/UserProfile'
 import React from 'react'
 import Header from './components/Header'
 import MainContent from './components/MainContent'
@@ -14,10 +15,17 @@ function App() {
 
   return (
     <>
+   
     <Header/>
     <MainContent/>
     <Footer/>
+    <UserProfile 
+        name="John Doe" 
+        age={30} 
+        bio="A passionate traveler and software developer." 
+      />
     <WelcomeMessage />
+
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
