@@ -1,9 +1,9 @@
-function UserProfile({ name, age, bio }) {
+function UserProfile(props) {
     return (
         <div>
-            <h2>{name}</h2>
-            <p>Age: {age}</p>
-            <p>Bio: {bio}</p>  {/* Ensure "Bio:" is explicitly written */}
+            <h2>{props.name}</h2>  {/* Using props.name explicitly */}
+            <p>Age: {props.age}</p>  {/* Using props.age explicitly */}
+            <p>Bio: {props.bio}</p>  {/* Using props.bio explicitly */}
         </div>
     );
 }
