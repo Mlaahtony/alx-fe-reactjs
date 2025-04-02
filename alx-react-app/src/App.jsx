@@ -15,9 +15,10 @@ function App() {
   return (
     <>
       <div>
-       <Header/>
-       <MainContent/>
-       <Footer/>
+      <Header />
+      <MainContent />
+      <Footer />
+       
       </div>
 
       <div>
