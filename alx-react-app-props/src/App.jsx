@@ -1,7 +1,6 @@
+import UserContext from './UserContext';  // Ensure it's 'UserContext' (case-sensitive)
 import React from "react";
-import UserContext from "./UserContext";
 import ProfilePage from "./components/ProfilePage";  // ✅ Correct path
-
 import UserProfile from './components/UserProfile';
 import Header from './components/Header';
 import MainContent from './components/MainContent';
