@@ -18,20 +18,10 @@ function App() {
     <UserContext.Provider value={userData}> {/* Provide userData to the context */}
       <div>
         <ProfilePage />
-      </div>
-
-      {/* Remove unnecessary props and let UserProfile consume context */}
-      <div>
-        <UserProfile /> 
-      </div>
-
-      <div>
+        <UserProfile />
         <Header />
         <MainContent />
         <Footer />
-      </div>
-
-      <div>
         <WelcomeMessage />
       </div>
 
@@ -59,8 +49,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
     </UserContext.Provider> 
-     )
-
+  );
 }
 
 export default App;

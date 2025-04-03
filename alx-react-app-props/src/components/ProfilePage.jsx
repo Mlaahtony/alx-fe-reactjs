@@ -1,8 +1,8 @@
 import UserInfo from './UserInfo';
 
 function ProfilePage() {
-  return <UserInfo />;
+  return <UserInfo />; // No need to pass userData anymore
 }
-
 export default ProfilePage;
+
 
