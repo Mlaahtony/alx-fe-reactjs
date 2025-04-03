@@ -1,8 +1,11 @@
-// src/components/UserInfo.jsx
-import React from 'react';
+
+import { useContext } from 'react';
+import UserContext from '../UserContext'; // Import UserContext
 import UserDetails from './UserDetails';
 
 function UserInfo() {
-  return <UserDetails />; // No need to pass userData prop anymore
+  const userData = useContext(UserContext); // Get data from context
+
+  return <UserDetails userData={userData} />;
 }
 export default UserInfo;

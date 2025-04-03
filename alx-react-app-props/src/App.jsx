@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import ProfilePage from './components/ProfilePage';
-import UserContext from './UserContext'; // Import UserContext
 import UserProfile from './components/UserProfile';
 import Header from './components/Header';
 import MainContent from './components/MainContent';
@@ -9,23 +8,21 @@ import WelcomeMessage from './components/WelcomeMessage';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
+import UserContext from './UserContext'; // Import UserContext
 
 function App() {
-  const [count, setCount] = useState(0); // FIXED: Declare count state
-  const userData = { name: "Alice", email: "alice@example.com" }; // Updated to Alice
+  const [count, setCount] = useState(0);
+  const userData = { name: "Alice", email: "alice@example.com" };
 
   return (
-    <UserContext.Provider value={userData}> {/* FIXED: Wrap provider properly */}
+    <UserContext.Provider value={userData}> {/* Provide userData to the context */}
       <div>
         <ProfilePage />
       </div>
 
+      {/* Remove unnecessary props and let UserProfile consume context */}
       <div>
-        <UserProfile 
-          name="Alice" 
-          age="25" 
-          bio="Loves hiking and photography" 
-        />
+        <UserProfile /> 
       </div>
 
       <div>
@@ -61,7 +58,9 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-    </UserContext.Provider> // FIXED: Closing tag now correctly placed
-  );
+    </UserContext.Provider> 
+     )
+
 }
+
 export default App;
