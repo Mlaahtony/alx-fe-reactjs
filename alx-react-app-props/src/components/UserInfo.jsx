@@ -1,8 +1,13 @@
 
-import UserDetails from './UserDetails';
+import React from "react";
+import UserDetails from "./UserDetails";  // Correct import of UserDetails component
 
-function UserInfo() {
-  return <UserDetails />; // No need to pass userData anymore
-}
+const UserInfo = () => {
+  return (
+    <div>
+      <h2>User Info</h2>
+      <UserDetails />  {/* Render the UserDetails component here */}
+    </div>
+  );
+};
 export default UserInfo;
-
