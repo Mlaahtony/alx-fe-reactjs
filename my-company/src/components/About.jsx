@@ -1,9 +1,26 @@
 function About() {
     return (
-      <div style={{ padding: '20px' }}>
-        <h1>About Us</h1>
-        <p>Our company has been providing top-notch services since 1990. We specialize in various fields including technology, marketing, and consultancy.</p>
+      <div style={styles.page}>
+        <h1>About My Company</h1>
+        <p>
+          My Company was founded with the vision to empower businesses through
+          innovative digital solutions. Our team is passionate, creative, and
+          committed to excellence.
+        </p>
       </div>
     );
   }
-  export default About;  
+  
+  const styles = {
+    page: {
+      padding: "2rem",
+      textAlign: "center",
+      backgroundColor: "#f0f0f5",
+      minHeight: "80vh",
+    }
+  };
+  
+  export default About;
+  
+  
+  

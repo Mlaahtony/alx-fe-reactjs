@@ -1,10 +1,20 @@
 function Home() {
     return (
-      <div style={{ padding: '20px' }}>
-        <h1>Welcome to Our Company</h1>
-        <p>We are dedicated to delivering excellence in all our services.</p>
+      <div style={styles.page}>
+        <h1>Welcome to My Company</h1>
+        <p>We’re glad you’re here. Let’s build something amazing together.</p>
       </div>
     );
   }
-    export default Home;
+  
+  const styles = {
+    page: {
+      padding: "2rem",
+      textAlign: "center",
+      backgroundColor: "#f4f6f8",
+      minHeight: "80vh",
+    }
+  };
+  
+  export default Home;
   
