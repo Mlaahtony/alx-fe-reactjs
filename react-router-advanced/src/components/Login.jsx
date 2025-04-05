@@ -1,27 +1,19 @@
-// src/components/Login.jsx
-import { useState } from 'react';
+import React from 'react';
+import { useAuth } from '../context/AuthContext'; // Import the useAuth hook
 import { useNavigate } from 'react-router-dom';
 
-const Login = ({ setIsAuthenticated }) => {
-  const [username, setUsername] = useState('');
+const Login = () => {
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    if (username) {
-      setIsAuthenticated(true);
-      navigate('/profile');
-    }
+    login(); // Set isAuthenticated to true
+    navigate('/profile'); // Redirect to profile after login
   };
 
   return (
     <div>
-      <h1>Login Page</h1>
-      <input
-        type="text"
-        placeholder="Enter Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
+      <h2>Login</h2>
       <button onClick={handleLogin}>Login</button>
     </div>
   );

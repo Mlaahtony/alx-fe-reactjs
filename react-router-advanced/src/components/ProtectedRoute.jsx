@@ -1,14 +1,16 @@
-// src/components/ProtectedRoute.jsx
+import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext'; // Import the useAuth hook
 
-const ProtectedRoute = ({ isAuthenticated }) => {
-  // If the user is not authenticated, redirect to the login page (or any other route)
+const ProtectedRoute = () => {
+  const { isAuthenticated } = useAuth(); // Access authentication state
+
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/login" />; // Redirect to login if not authenticated
   }
 
-  // If authenticated, render the nested routes
-  return <Outlet />;
+  return <Outlet />; // If authenticated, render the child routes (nested routes)
 };
 
 export default ProtectedRoute;
+
