@@ -2,73 +2,74 @@ import React, { useState } from 'react';
 
 const TodoList = () => {
   const [todos, setTodos] = useState([
-    { id: 1, text: 'Learn React', completed: false },
-    { id: 2, text: 'Build Todo App', completed: false },
+    { text: 'Learn React', isCompleted: false },
+    { text: 'Build Todo App', isCompleted: false }
   ]);
-  const [newTodo, setNewTodo] = useState(''); // For handling new todo input
+  const [newTodo, setNewTodo] = useState('');
 
+  // Handle toggling the completion status of a todo
+  const handleToggle = (index) => {
+    const updatedTodos = [...todos];
+    updatedTodos[index].isCompleted = !updatedTodos[index].isCompleted;
+    setTodos(updatedTodos);
+  };
+
+  // Handle deleting a todo
+  const handleDelete = (index) => {
+    const updatedTodos = todos.filter((_, todoIndex) => todoIndex !== index);
+    setTodos(updatedTodos);
+  };
+
+  // Handle adding a new todo
   const handleAddTodo = () => {
     if (newTodo.trim()) {
-      const newTodoItem = {
-        id: todos.length + 1,
-        text: newTodo,
-        completed: false,
-      };
-      setTodos([...todos, newTodoItem]);
-      setNewTodo('');
+      setTodos([...todos, { text: newTodo, isCompleted: false }]);
+      setNewTodo(''); // Clear the input after adding the todo
     }
-  };
-
-  const handleToggleTodo = (id) => {
-    const updatedTodos = todos.map((todo) =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    );
-    setTodos(updatedTodos);
-  };
-
-  const handleDeleteTodo = (id) => {
-    const updatedTodos = todos.filter((todo) => todo.id !== id);
-    setTodos(updatedTodos);
   };
 
   return (
     <div>
       <h2>Todo List</h2>
-      {/* Input and button to add new todos */}
+      {/* Input field and Add Todo button */}
       <input
-        data-testid="todo-input"
+        type="text"
+        data-testid="todo-input"  // Add data-testid for testing
         value={newTodo}
         onChange={(e) => setNewTodo(e.target.value)}
         placeholder="Add a new todo"
       />
       <button
-        data-testid="add-button"
+        data-testid="add-button"  // Add data-testid for testing
         onClick={handleAddTodo}
       >
         Add Todo
       </button>
-      
+
+      {/* Todo list */}
       <ul data-testid="todo-list">
-        {todos.map((todo) => (
+        {todos.map((todo, index) => (
           <li
-            key={todo.id}
-            data-testid={`todo-${todo.id}`}
+            key={index}
+            data-testid={`todo-${index + 1}`}
             style={{
-              textDecoration: todo.completed ? 'line-through' : 'none',
+              textDecoration: todo.isCompleted ? 'line-through' : 'none'
             }}
           >
             {todo.text}
             <button
-              data-testid={`delete-${todo.id}`}
-              onClick={() => handleDeleteTodo(todo.id)}
+              data-testid={`toggle-${index + 1}`}
+              style={{ marginLeft: '10px' }}
+              onClick={() => handleToggle(index)}
             >
-              Delete
+              Complete
             </button>
             <button
-              data-testid={`toggle-${todo.id}`}
-              onClick={() => handleToggleTodo(todo.id)}
+              data-testid={`delete-${index + 1}`}
+              style={{ marginLeft: '10px' }}
+              onClick={() => handleDelete(index)}
             >
-              {todo.completed ? 'Undo' : 'Complete'}
+              Delete
             </button>
           </li>
         ))}
@@ -78,5 +79,3 @@ const TodoList = () => {
 };
 
 export default TodoList;
-
-
