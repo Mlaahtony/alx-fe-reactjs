@@ -1,6 +1,6 @@
 
 import React from 'react';
-import TodoList from './components/todoList';  // Ensure the correct path to your TodoList component
+import TodoList from './components/TodoList';  // Ensure the correct path to your TodoList component
 
 const App = () => {
   return (
