@@ -8,13 +8,14 @@ const Search = () => {
   const [error, setError] = useState('');
   const [location, setLocation] = useState('');
   const [minRepos, setMinRepos] = useState(0);
+  const [minFollowers, setMinFollowers] = useState(0);
 
   useEffect(() => {
     const fetchUsers = async () => {
       setLoading(true);
       setError('');
       try {
-        const data = await searchUsers(location, minRepos);
+        const data = await searchUsers(location, minRepos, minFollowers);
         setUsers(data);
       } catch {
         setError('Error fetching users');
@@ -24,7 +25,7 @@ const Search = () => {
     };
 
     fetchUsers();
-  }, [location, minRepos]); // Refetch when location or minRepos change
+  }, [location, minRepos, minFollowers]); // Refetch when any search criteria change
 
   return (
     <div className="w-full max-w-md mx-auto">
@@ -41,6 +42,13 @@ const Search = () => {
           value={minRepos}
           onChange={(e) => setMinRepos(Number(e.target.value))}
           placeholder="Minimum public repos"
+          className="p-2 rounded border border-gray-300 mb-2 w-full"
+        />
+        <input
+          type="number"
+          value={minFollowers}
+          onChange={(e) => setMinFollowers(Number(e.target.value))}
+          placeholder="Minimum followers"
           className="p-2 rounded border border-gray-300 w-full"
         />
       </div>
@@ -61,6 +69,7 @@ const Search = () => {
                 </h2>
                 <p>Location: {user.location || 'N/A'}</p>
                 <p>Public Repos: {user.public_repos}</p>
+                <p>Followers: {user.followers}</p>
                 <a
                   href={user.html_url}
                   target="_blank"
@@ -78,5 +87,3 @@ const Search = () => {
   );
 };
 export default Search;
-
-
