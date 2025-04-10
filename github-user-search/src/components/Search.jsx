@@ -1,18 +1,20 @@
 // src/components/Search.jsx
 import React, { useState, useEffect } from 'react';
-import { fetchUserData } from '../services/githubService';
+import { searchUsers } from '../services/githubService';
 
 const Search = () => {
-  const [users, setUsers] = useState([]); // State to store user data
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [location, setLocation] = useState('');
+  const [minRepos, setMinRepos] = useState(0);
 
   useEffect(() => {
     const fetchUsers = async () => {
       setLoading(true);
       setError('');
       try {
-        const data = await fetchUserData();
+        const data = await searchUsers(location, minRepos);
         setUsers(data);
       } catch {
         setError('Error fetching users');
@@ -22,10 +24,26 @@ const Search = () => {
     };
 
     fetchUsers();
-  }, []); // Empty dependency array ensures this runs once on component mount
+  }, [location, minRepos]); // Refetch when location or minRepos change
 
   return (
     <div className="w-full max-w-md mx-auto">
+      <div className="mb-4">
+        <input
+          type="text"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+          placeholder="Enter location"
+          className="p-2 rounded border border-gray-300 mb-2 w-full"
+        />
+        <input
+          type="number"
+          value={minRepos}
+          onChange={(e) => setMinRepos(Number(e.target.value))}
+          placeholder="Minimum public repos"
+          className="p-2 rounded border border-gray-300 w-full"
+        />
+      </div>
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
       <ul className="space-y-4">
@@ -39,9 +57,8 @@ const Search = () => {
               />
               <div>
                 <h2 className="text-lg font-semibold">
-                  {user.name || user.login}
+                  {user.login}
                 </h2>
-                <p>Login: {user.login}</p>
                 <p>Location: {user.location || 'N/A'}</p>
                 <p>Public Repos: {user.public_repos}</p>
                 <a
