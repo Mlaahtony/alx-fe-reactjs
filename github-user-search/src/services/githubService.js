@@ -2,7 +2,7 @@
 // src/services/githubService.js
 import axios from 'axios';
 
-const BASE_URL = 'https://api.github.com/search/users';
+const BASE_URL = "https://api.github.com/search/users?q"
 const HEADERS = {
   Authorization: `token ${import.meta.env.VITE_GITHUB_API_TOKEN}`,
 };
