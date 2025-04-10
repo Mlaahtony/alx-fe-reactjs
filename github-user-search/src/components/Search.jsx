@@ -43,8 +43,8 @@ const SearchBar = () => {
         <div>
           <h2>{userData.name}</h2>
           <p>{userData.bio}</p>
+          <p><strong>Location:</strong> {userData.location}</p>
           <img src={userData.avatar_url} alt={userData.login} />
-          {/* Display other user details as needed */}
         </div>
       )}
       {repos.length > 0 && (
@@ -67,4 +67,5 @@ const SearchBar = () => {
 };
 
 export default SearchBar;
+
 
