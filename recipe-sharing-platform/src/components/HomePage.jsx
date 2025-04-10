@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';  // Import Link from react-router-dom
 import recipesData from '../data.json';
 
 const HomePage = () => {
@@ -26,12 +27,13 @@ const HomePage = () => {
             <div className="p-4">
               <h2 className="text-xl font-semibold mb-2 text-gray-800">{recipe.title}</h2>
               <p className="text-gray-600 text-sm">{recipe.summary}</p>
-              <a
-                href="#"
+              {/* Corrected Link Component */}
+              <Link
+                to={`/recipe/${recipe.id}`}
                 className="inline-block mt-4 text-blue-500 hover:underline text-sm font-medium"
               >
                 View Recipe →
-              </a>
+              </Link>
             </div>
           </div>
         ))}
@@ -39,5 +41,4 @@ const HomePage = () => {
     </div>
   );
 };
-
 export default HomePage;
