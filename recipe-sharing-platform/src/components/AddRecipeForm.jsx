@@ -5,11 +5,13 @@ const AddRecipeForm = ({ addRecipe }) => {
   const [title, setTitle] = useState('');
   const [ingredients, setIngredients] = useState('');
   const [instructions, setInstructions] = useState('');
+  const [steps, setSteps] = useState('');
   const [image, setImage] = useState('');
   const [errors, setErrors] = useState({
     title: '',
     ingredients: '',
     instructions: '',
+    steps: ''
   });
 
   // Handle form submission
@@ -21,12 +23,14 @@ const AddRecipeForm = ({ addRecipe }) => {
       title: '',
       ingredients: '',
       instructions: '',
+      steps: '',
     };
 
     // Check if fields are empty
     if (!title) newErrors.title = 'Title is required.';
     if (!ingredients) newErrors.ingredients = 'Ingredients are required.';
     if (!instructions) newErrors.instructions = 'Instructions are required.';
+    if (!steps) newErrors.steps = 'Steps are required.';
     else {
       // Check if there are at least 2 ingredients
       if (ingredients.split('\n').length < 2) {
@@ -38,13 +42,14 @@ const AddRecipeForm = ({ addRecipe }) => {
     setErrors(newErrors);
 
     // If no errors, submit the form
-    if (!newErrors.title && !newErrors.ingredients && !newErrors.instructions) {
+    if (!newErrors.title && !newErrors.ingredients && !newErrors.instructions && !newErrors.steps) {
       const newRecipe = {
         id: Date.now(),  // Unique ID using current timestamp
         title,
         summary: ingredients.slice(0, 100),  // Summary of ingredients
         ingredients: ingredients.split('\n'),  // Split ingredients into an array
         instructions,
+        steps: steps.split('\n'),  // Split steps into an array for better data structure
         image: image || 'https://via.placeholder.com/150',  // Default image if not provided
       };
 
@@ -54,6 +59,7 @@ const AddRecipeForm = ({ addRecipe }) => {
       setTitle('');
       setIngredients('');
       setInstructions('');
+      setSteps('');
       setImage('');
     }
   };
@@ -107,6 +113,21 @@ const AddRecipeForm = ({ addRecipe }) => {
           {errors.instructions && <p className="text-red-500 text-sm mt-2">{errors.instructions}</p>}
         </div>
 
+        {/* Steps */}
+        <div>
+          <label htmlFor="steps" className="block text-gray-700 text-sm font-medium">Steps</label>
+          <textarea
+            id="steps"
+            value={steps}
+            onChange={(e) => setSteps(e.target.value)}
+            required
+            rows="5"
+            className="w-full p-3 border border-gray-300 rounded-lg mt-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter cooking steps (separate each step with a new line)"
+          />
+          {errors.steps && <p className="text-red-500 text-sm mt-2">{errors.steps}</p>}
+        </div>
+
         {/* Image URL */}
         <div>
           <label htmlFor="image" className="block text-gray-700 text-sm font-medium">Recipe Image URL (Optional)</label>
@@ -132,5 +153,6 @@ const AddRecipeForm = ({ addRecipe }) => {
   );
 };
 export default AddRecipeForm;
+
 
 
