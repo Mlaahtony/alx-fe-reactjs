@@ -5,6 +5,7 @@ import { fetchUserData } from '../services/githubService';
 const SearchBar = () => {
   const [searchInput, setSearchInput] = useState('');
   const [userData, setUserData] = useState(null);
+  const [repos, setRepos] = useState([]);
   const [error, setError] = useState('');
 
   const handleInputChange = (event) => {
@@ -14,13 +15,15 @@ const SearchBar = () => {
   const handleSearch = async () => {
     setError('');
     setUserData(null);
+    setRepos([]);
     if (!searchInput.trim()) {
       setError('Please enter a GitHub username.');
       return;
     }
     try {
-      const data = await fetchUserData(searchInput.trim());
-      setUserData(data);
+      const { user, repos } = await fetchUserData(searchInput.trim());
+      setUserData(user);
+      setRepos(repos);
     } catch (err) {
       setError('User not found or error fetching data.');
     }
@@ -44,8 +47,24 @@ const SearchBar = () => {
           {/* Display other user details as needed */}
         </div>
       )}
+      {repos.length > 0 && (
+        <div>
+          <h3>Repositories:</h3>
+          <ul>
+            {repos.map((repo) => (
+              <li key={repo.id}>
+                <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
+                  {repo.name}
+                </a>
+                : {repo.description}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };
 
 export default SearchBar;
+
