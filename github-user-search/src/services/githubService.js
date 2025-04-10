@@ -1,4 +1,3 @@
-
 // src/services/githubService.js
 import axios from 'axios';
 
@@ -7,26 +6,12 @@ const HEADERS = {
   Authorization: `token ${import.meta.env.VITE_GITHUB_API_TOKEN}`,
 };
 
-export const searchUsers = async (location = '', minRepos = 0, minFollowers = 0) => {
+export const fetchUserData = async (username) => {
   try {
-    // Construct the search query
-    const locationQuery = location ? `location:${encodeURIComponent(location)}` : '';
-    const reposQuery = minRepos > 0 ? `repos:>=${minRepos}` : '';
-    const followersQuery = minFollowers > 0 ? `followers:>=${minFollowers}` : '';
-    const query = [locationQuery, reposQuery, followersQuery].filter(Boolean).join('+');
-
-    // Make the API request
-    const response = await axios.get(BASE_URL, {
-      headers: HEADERS,
-      params: {
-        q: query,
-        per_page: 30, // Adjust as needed
-      },
-    });
-
-    return response.data.items;
+    const response = await axios.get(`${BASE_URL}/${username}`, { headers: HEADERS });
+    return response.data;
   } catch (error) {
-    console.error('Error searching GitHub users:', error);
+    console.error('Error fetching GitHub user data:', error);
     throw error;
   }
 };
