@@ -1,19 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import AddRecipeForm from './AddRecipeForm';
 import { Link } from 'react-router-dom';  // Import Link from react-router-dom
 import recipesData from '../data.json';
 
 const HomePage = () => {
-  const [recipes, setRecipes] = useState([]);
+  const [recipes, setRecipes] = useState(recipesData);
 
-  useEffect(() => {
-    // Simulate data fetching from the JSON file
-    setRecipes(recipesData);
-  }, []);
+  const addRecipe = (newRecipe) => {
+    setRecipes((prevRecipes) => [...prevRecipes, newRecipe]);
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold mb-6 text-center text-blue-600">Recipe Sharing Platform</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      
+      {/* Add Recipe Form Component */}
+      <AddRecipeForm addRecipe={addRecipe} />
+
+      {/* Display Recipe List */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8">
         {recipes.map((recipe) => (
           <div
             key={recipe.id}
@@ -27,7 +32,6 @@ const HomePage = () => {
             <div className="p-4">
               <h2 className="text-xl font-semibold mb-2 text-gray-800">{recipe.title}</h2>
               <p className="text-gray-600 text-sm">{recipe.summary}</p>
-              {/* Corrected Link Component */}
               <Link
                 to={`/recipe/${recipe.id}`}
                 className="inline-block mt-4 text-blue-500 hover:underline text-sm font-medium"
