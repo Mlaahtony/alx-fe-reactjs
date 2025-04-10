@@ -14,11 +14,8 @@ const AddRecipeForm = ({ addRecipe }) => {
     steps: ''
   });
 
-  // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Basic validation
+  // Validation function to validate each form field
+  const validate = () => {
     const newErrors = {
       title: '',
       ingredients: '',
@@ -37,6 +34,16 @@ const AddRecipeForm = ({ addRecipe }) => {
         newErrors.ingredients = 'Please list at least two ingredients.';
       }
     }
+
+    return newErrors;
+  };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Validate the form
+    const newErrors = validate();
 
     // Set error states
     setErrors(newErrors);
@@ -153,6 +160,8 @@ const AddRecipeForm = ({ addRecipe }) => {
   );
 };
 export default AddRecipeForm;
+
+
 
 
 
